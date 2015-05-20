@@ -10,23 +10,24 @@ LDAPSEARCH="ldapmodify -v -h ${LDAPHOST} -p ${LDAPPORT} -x -D uid=admin,ou=syste
 
 USER=$1
 shift
-GROUPDN="cn=test,ou=Groups,dc=example,dc=com"
-USERDN="uid=$USER,ou=Users,dc=example,dc=com"
+DOMAIN="dc=merge,dc=trout,dc=openmicroscopy,dc=org"
+GROUPDN="cn=test,ou=Groups,$DOMAIN"
+USERDN="uid=$USER,ou=Users,$DOMAIN"
 
 if [ $1 = "group" ]; then
     $LDAPADD << EOF
-dn: ou=Groups,dc=example,dc=com
+dn: ou=Groups,$DOMAIN
 objectClass: organizationalUnit
 objectClass: top
 ou: Groups
 
 -
 
-dn: cn=test,ou=Groups,dc=example,dc=com
+dn: cn=test,ou=Groups,$DOMAIN
 objectClass: groupOfUniqueNames
 objectClass: top
 cn: test
-uniquemember: uid=$USER,ou=Users,dc=example,dc=com
+uniquemember: uid=$USER,ou=Users,$DOMAIN
 EOF
 elif [ $1 = "add" ]; then
 
