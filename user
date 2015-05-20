@@ -45,7 +45,7 @@ cn: M. $USER
 givenName: $USER
 sn: User
 uid: $USER
-mail: $USER@example.com
+mail: $USER@openmicroscopy.org
 ou: Users
 userpassword: $USER
 EOF
